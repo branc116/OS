@@ -16,8 +16,10 @@ void insert_to_tree(tree_t** root,int data) {
         return;
     }
     if (data > (*root)->data) {
-        insert_to_tree()
+        insert_to_tree(&(((*(root))->right)), data);
+        return;
     }
+    insert_to_tree(&(((*(root))->left)), data);
 }
 
 
