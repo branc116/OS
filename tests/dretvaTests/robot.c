@@ -10,6 +10,17 @@ struct tree {
 };
 typedef struct tree tree_t;
 
+void randomize(int n){
+	int i,index,random,temp;
+	for(i=0;i<10000;++i){
+		temp=a[i];
+		index=rand();
+		random=a[index];
+		a[index]=temp;
+		a[i]=random;
+	}
+}
+
 void insert_to_tree(tree_t** root,int data) {
     if (*root == NULL) {
         (*root) = malloc(sizeof(tree_t));
