@@ -22,6 +22,11 @@ void insert_to_tree(tree_t** root,int data) {
     insert_to_tree(&(((*(root))->left)), data);
 }
 
+void print_tree(tree_t* root) {
+    if (root == NULL)
+        return;
+    
+}
 
 void fill() {
     int i=0;
