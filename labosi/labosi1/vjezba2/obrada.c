@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #define N 6    /* broj razina proriteta */
+#define LINUS_IS_WRONG
 
 int OZNAKA_CEKANJA[N];
 int PRIORITET[N];
@@ -39,8 +40,12 @@ void obrada_signala(int i, int sleepTime){
     }
     out[i] = 'K';
     printf("%s", out);
+#ifdef LINUS_IS_WRONG
+    OZNAKA_CEKANJA[i]--;
+#endif
     return;
 }
+#ifndef LINUS_IS_WRONG
 void prekidna_rutina(int sig){
     int n=-1;
     char out[] = "------\n";
@@ -52,13 +57,25 @@ void prekidna_rutina(int sig){
     zabrani_prekidanje(n);
     out[n] = 'X';
     printf("%s", out);
-    OZNAKA_CEKANJA[n]=1;
     obrada_signala(n, 5);
     dozvoli_prekidanje(n);
-    /* // zabrani_prekidanje();
-    // dozvoli_prekidanje(); */
 }
-
+#else
+void prekidna_rutina(int sig){
+    int n=-1;
+    char out[] = "------\n";
+    n = getIndex(sig);
+    
+    if (n == -1)
+        return;
+    
+    zabrani_prekidanje(n);
+    out[n] = 'X';
+    printf("%s", out);
+    OZNAKA_CEKANJA[n]++;
+    dozvoli_prekidanje(n);
+}
+#endif
 int main ( void )
 {
     int i=0;
@@ -69,6 +86,17 @@ int main ( void )
     printf("Proces obrade prekida, PID=%d \n", (int)getpid());
 
     printf ("Zavrsio osnovni program\n");
-    obrada_signala(0, 12);
+    
+    while(1) {
+#ifndef LINUS_IS_WRONG
+        for (i = N - 1;i>=0;i--) {
+            if (OZNAKA_CEKANJA[i] > 0) {
+                obrada_signala(i, 5);
+            }
+        }
+#else
+        sleep(4);
+#endif
+    }
     return 0;
 }

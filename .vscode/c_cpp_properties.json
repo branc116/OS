@@ -81,7 +81,11 @@
             ],
             "browse": {
                 "path": [
-                    
+                    "${localappdata}/lxss/rootfs/usr/lib/gcc/x86_64-linux-gnu/5/include",
+                    "${localappdata}/lxss/rootfs/usr/local/include",
+                    "${localappdata}/lxss/rootfs/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed",
+                    "${localappdata}/lxss/rootfs/usr/include/x86_64-linux-gnu",
+                    "${localappdata}/lxss/rootfs/usr/include"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
