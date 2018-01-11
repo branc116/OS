@@ -2,12 +2,11 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX 40
-long long n;
+#define MAX 10
+long long int n;
 void *increment(void *par) {
     int inc = *((int*)(par));
-    while(inc--)
-        n++;
+    n++;
     return;
 }
 
